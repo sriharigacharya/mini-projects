@@ -17,9 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    float num1=0,num2,ans;
-    char tempch='+',op;
-    int state=0;
+    public float num1=0,num2=0,ans=0;
+    public char tempch='+',op;
+    public int errorcode=0,state;
     TextView txt1,txt2,txt3;
 Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eight8,nine9,zero0,eq,dott,nothing;
     @SuppressLint("MissingInflatedId")
@@ -55,7 +55,7 @@ Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eig
         zero0=findViewById(R.id.zero);
         eq=findViewById(R.id.equal);
         dott=findViewById(R.id.dot);
-        nothing=findViewById(R.id.empty);
+//        nothing=findViewById(R.id.empty);
 
         E.setOnClickListener(this);
         C.setOnClickListener(this);
@@ -95,48 +95,82 @@ Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eig
                     }
                 }
             }
+            if((p.length()==1&&p.charAt(0)=='0')||state==-1||p.equals("Error"))
+            {
+                txt2.setText(temp.getText());
 
-            p+=temp.getText();
-            txt2.setText(p);
+                num1=0;
+                num2=0;
+                tempch='+';
+                errorcode=0;
+                state=0;
+            }
+            else {
+                p += temp.getText();
+                txt2.setText(p);
+            }
         }
 
         else if(id==R.id.plus||id==R.id.minus||id==R.id.multi||id==R.id.divide||id==R.id.percen){
             op=temp.getText().charAt(0);
-            num2=Float.parseFloat((String) txt2.getText());
-
+            if(txt2.getText().toString().isEmpty()){
+                num2=0;
+            }
+            else {
+                num2 = Float.parseFloat((String) txt2.getText());
+            }
             calc(tempch);
-            num1=ans;
-            num2=0;
-            tempch=op;
-            txt1.setText(Float.toString(ans));
-            txt2.setText("");
-            txt3.setText(" "+op);
+            if(errorcode==-1)
+            {
+                txt2.setText("Error");
+                return;
+            }else {
+                num1 = ans;
+                num2 = 0;
+                tempch = op;
+                txt1.setText(Float.toString(ans));
+                txt2.setText("");
+                txt3.setText(" " + op);
+            }
 
 
 
         } else if (id == R.id.equal) {
-            op=temp.getText().charAt(0);
-            num2=Float.parseFloat((String) txt2.getText());
-            calc(tempch);
-            num1=0;
-            tempch='+';
-            txt2.setText(Float.toString(ans));
-            txt3.setText(" "+op);
+            if(txt2.getText().toString().isEmpty()){
+                return;
+            }else{
+                op = temp.getText().charAt(0);
+                num2 = Float.parseFloat((String) txt2.getText());
+                calc(tempch);
+                if(errorcode==-1)
+                {
+                    txt2.setText("Error");
+                    ans=0;
+                    return;
+                }else {
+                    num1 = 0;
+
+                    tempch = '+';
+                    txt2.setText(Float.toString(ans));
+
+                    txt3.setText(" " + op);
+                    state = -1;
+                }
+            }
 
         } else if (id==R.id.clear) {
             num1=0;
             tempch='+';
-            txt2.setText("");
+            txt2.setText("0");
             txt1.setText("");
             txt3.setText("");
+            errorcode=0;
 
         } else if (id==R.id.erase) {
             String s = new String((String) txt2.getText());
             txt2.setText(s.substring(0,s.length()-1));
-//
-
-
         }
+
 
     }
 
@@ -158,7 +192,7 @@ Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eig
                 if (num2 != 0) {
                     ans = num1 / num2;
                 } else {
-                    txt2.setText("Error");
+                    errorcode=-1;
                 }
                 break;
 
@@ -166,7 +200,7 @@ Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eig
                 if (num2 != 0) {
                     ans = num1 % num2;
                 } else {
-                    txt2.setText("Error");
+                    errorcode=-1;
                 }
                 break;
 
