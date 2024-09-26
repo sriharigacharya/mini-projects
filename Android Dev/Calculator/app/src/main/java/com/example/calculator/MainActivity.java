@@ -57,6 +57,7 @@ Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eig
         dott=findViewById(R.id.dot);
 //        nothing=findViewById(R.id.empty);
 
+
         E.setOnClickListener(this);
         C.setOnClickListener(this);
         div.setOnClickListener(this);
