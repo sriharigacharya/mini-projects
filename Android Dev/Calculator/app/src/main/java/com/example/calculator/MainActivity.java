@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public char tempch='+',op;
     public int errorcode=0,state;
     TextView txt1,txt2,txt3;
-Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eight8,nine9,zero0,eq,dott,nothing;
+TextView temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eight8,nine9,zero0,eq,dott,nothing;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

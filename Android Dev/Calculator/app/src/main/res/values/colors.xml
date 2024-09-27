@@ -4,4 +4,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="darkgrey">#363a40</color>
     <color name="lightgrey">#aaabad</color>
+    <color name="darkishwhite">#adadad</color>
+    <color name="darkgrey1">#A9A9A9</color>
+    <color name="darkdarkgrey">#3b3b3b</color>
+    <color name="darkergrey">#141414</color>
+    <color name="lightdarkergrey">#1c1c1c</color>
+    <color name="steelgrey">#222222</color>
+    <color name="darkwhite">#d1d1d1</color>
+    <color name="shadowblue">#0099CC</color>
+    <color name="holo_blue_bright">#00DDFF</color>
+    <color name="holo_red_light">#FF4444</color>
+    <color name="yellow">#fae900</color>
 </resources>
