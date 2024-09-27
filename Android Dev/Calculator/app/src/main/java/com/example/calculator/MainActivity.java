@@ -160,14 +160,22 @@ Button temp,E,C,div,mul,per,add,sub,one1,two2,three3,four4,five5,six6,seven7,eig
             }
 
         } else if (id==R.id.clear) {
-            num1=0;
-            tempch='+';
-            txt2.setText("0");
-            txt1.setText("");
-            txt3.setText("");
-            errorcode=0;
+            if(txt2.getText().toString().isEmpty()) {
+                return;
+            }
+            else {
+                num1 = 0;
+                tempch = '+';
+                txt2.setText("0");
+                txt1.setText("");
+                txt3.setText("");
+                errorcode = 0;
+            }
 
         } else if (id==R.id.erase) {
+            if(txt2.getText().toString().isEmpty()) {
+                return;
+            }
             String s = new String((String) txt2.getText());
             txt2.setText(s.substring(0,s.length()-1));
         }

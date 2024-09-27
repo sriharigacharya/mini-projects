@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/steelgrey">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/textviewer"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:shadowColor="@color/white"
+        android:shadowRadius="40"
+        android:text="TIC TAC TOE"
+        android:textColor="@color/white"
+        android:textSize="50dp"></TextView>
+
+
+
+    <TextView
+        android:id="@+id/border1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/symbolO"
+        app:layout_constraintEnd_toEndOf="@id/player1p"
+        app:layout_constraintTop_toTopOf="@id/player1"
+        app:layout_constraintBottom_toBottomOf="@+id/player1"
+        android:background="@drawable/shapeblue"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="-5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"></TextView>
+
+    <TextView
+        android:id="@+id/border2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/symbolX"
+        app:layout_constraintEnd_toEndOf="@id/player2p"
+        app:layout_constraintTop_toTopOf="@id/player2"
+        app:layout_constraintBottom_toBottomOf="@+id/player2"
+        android:background="@drawable/shapered"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="-5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"></TextView>
+
+    <EditText
+        android:id="@+id/player1"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/player1p"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/steelgrey"
+        android:shadowColor="@android:color/holo_blue_bright"
+        android:shadowRadius="10"
+        android:text="PLAYER-1"
+        android:textColor="@color/darkwhite"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
+
+    <EditText
+        android:id="@+id/player2"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/player2p"
+        android:background="@color/steelgrey"
+        android:shadowColor="@android:color/holo_red_light"
+        android:shadowRadius="10"
+        android:text="PLAYER-2"
+        android:textColor="@color/darkwhite"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/symbolO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="140dp"
+        android:background="@color/steelgrey"
+        android:shadowColor="@android:color/holo_blue_bright"
+        android:shadowRadius="10"
+        android:text="-O-"
+        android:textColor="@color/darkwhite"
+        android:textSize="30sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/symbolX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/steelgrey"
+        android:shadowColor="@android:color/holo_red_light"
+        android:shadowRadius="10"
+        android:text="-X-"
+        android:textColor="@color/darkwhite"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/player1p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/steelgrey"
+        android:shadowColor="@android:color/holo_blue_bright"
+        android:shadowRadius="10"
+        android:text="-0-"
+        android:textColor="@color/darkwhite"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/player2p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/steelgrey"
+        android:shadowColor="@android:color/holo_red_light"
+        android:shadowRadius="10"
+        android:text="-0-"
+        android:textColor="@color/darkwhite"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <GridLayout
+        android:id="@+id/buttongrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/symbolX"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="10dp"
+        android:columnCount="3"
+        android:rowCount="1">
+
+        <TextView
+            android:id="@+id/newgbutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/buttons"
+            android:layout_columnWeight="1"
+            android:text="NEWGAME"
+            android:shadowColor="@color/white"
+            android:shadowRadius="10"
+            android:textColor="@color/darkwhite"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:fontFamily="serif-monospace"
+            android:textSize="24sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/startbutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/buttonpressedgreen"
+            android:layout_columnWeight="1"
+            android:shadowColor="@color/white"
+            android:shadowRadius="10"
+            android:textColor="@color/darkwhite"
+            android:text="START"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:fontFamily="serif-monospace"
+            android:textSize="24sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/resetbutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/buttons"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:shadowColor="@color/white"
+            android:shadowRadius="10"
+            android:textColor="@color/darkwhite"
+            android:text="RESET"
+            android:gravity="center"
+            android:fontFamily="serif-monospace"
+            android:textSize="24sp"
+            >
+
+        </TextView>
+    </GridLayout>
+
+
+    <TextView
+        android:id="@+id/toplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:shadowColor="@color/white"
+        android:shadowRadius="10"
+        android:text="-TO PLAY-"
+        android:textColor="@color/darkwhite"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttongrid" />
+
+    <TextView
+        android:id="@+id/toplayplayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:shadowRadius="10"
+        android:text="-TO PLAY-"
+        android:textColor="@color/darkwhite"
+        android:shadowColor="@color/white"
+        android:textSize="18sp"
+        android:padding="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/toplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:columnCount="3"
+        android:rowCount="3"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toplayplayer">
+
+        <TextView
+            android:id="@+id/topl"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/top"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/topr"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/middlel"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/middle"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/middler"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/bottoml"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/bottom"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+        <TextView
+            android:id="@+id/bottomr"
+            android:background="@drawable/tlp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+
+            android:text="-"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@android:color/transparent"
+            ></TextView>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
