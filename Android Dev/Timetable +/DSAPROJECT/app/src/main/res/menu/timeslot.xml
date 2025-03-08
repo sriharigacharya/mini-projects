@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/ts1" android:title="09:00AM - 10:00AM" android:orderInCategory="1"/>
+        <item android:id="@+id/ts2" android:title="10:00AM - 11:00AM" android:orderInCategory="2"/>
+        <item android:id="@+id/ts3" android:title="11:30AM - 12:30PM" android:orderInCategory="3"/>
+        <item android:id="@+id/ts4" android:title="12:30AM - 01:30AM" android:orderInCategory="4"/>
+        <item android:id="@+id/ts5" android:title="01:30PM - 02:30PM" android:orderInCategory="5"/>
+        <item android:id="@+id/ts6" android:title="02:30PM - 03:30PM" android:orderInCategory="6"/>
+        <item android:id="@+id/ts7" android:title="03:30PM - 04:30PM" android:orderInCategory="7"/>
+</menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/sc1" android:title="SECTION-A" android:orderInCategory="1"/>
+    <item android:id="@+id/sc2" android:title="SECTION-B" android:orderInCategory="2"/>
+    <item android:id="@+id/sc3" android:title="SECTION-C" android:orderInCategory="3"/>
+    <item android:id="@+id/sc4" android:title="SECTION-D" android:orderInCategory="4"/>
+    <item android:id="@+id/sc5" android:title="SECTION-E" android:orderInCategory="5"/>
+    <item android:id="@+id/sc6" android:title="SECTION-F" android:orderInCategory="6"/>
+
+</menu>
