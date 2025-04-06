@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:orientation="horizontal"
+       android:layout_marginBottom="60dp"
+       android:background="@color/gray">
+       <ImageButton
+           android:id="@+id/navbarclosebutton"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/navbarclose"
+           android:layout_gravity="center"></ImageButton>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Hello, Srihari"
+           android:layout_gravity="center"
+           android:textSize="25dp"
+           android:layout_marginStart="20sp"/>
+   </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/profileimg"
+            android:padding="10dp"
+            android:layout_gravity="center"></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/export"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exportimg"
+            android:padding="10dp"
+            android:layout_gravity="center"></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Download as CSV"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp"></TextView>
+    </LinearLayout>
+
+</LinearLayout>

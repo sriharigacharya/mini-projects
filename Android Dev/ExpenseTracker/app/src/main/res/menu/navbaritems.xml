@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profileimg">
+
+    </item>
+    <item
+        android:id="@+id/managecategories"
+        android:title="Manage Categories"
+        android:icon="@drawable/managecategoriesimg">
+
+    </item>
+    <item
+        android:id="@+id/export"
+        android:title="Export to CSV"
+        android:icon="@drawable/exportimg">
+
+    </item>
+    <item
+        android:id="@+id/Aboutus"
+        android:title="About Us">
+
+    </item>
+
+
+</menu>
