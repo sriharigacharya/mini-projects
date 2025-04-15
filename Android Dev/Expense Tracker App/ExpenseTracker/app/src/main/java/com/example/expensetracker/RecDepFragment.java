@@ -1,12 +1,22 @@
 package com.example.expensetracker;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +24,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class RecDepFragment extends Fragment {
+
+    private FloatingActionButton addnewrecdep;
+    private MyRepository myRepository;
+    private RecyclerView recyclerView;
+    private List<RecurringExpense> recurringExpenseList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +74,46 @@ public class RecDepFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rec_dep, container, false);
+        View view=inflater.inflate(R.layout.fragment_rec_dep, container, false);
+        myRepository=new MyRepository(getActivity().getApplication());
+        recurringExpenseList=myRepository.getAllRecurringExpenses();
+        recyclerView=view.findViewById(R.id.recdeplist);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new RecDeplistAdapter(getContext(),recurringExpenseList));
+
+        addnewrecdep=view.findViewById(R.id.addrecdepbutton);
+        addnewrecdep.setOnClickListener(v -> {
+            Intent intent=new Intent(getActivity(),NewRecDepActivity.class);
+            startActivity(intent);
+        });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT){
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position=viewHolder.getAdapterPosition();
+                new AlertDialog.Builder(viewHolder.itemView.getContext())
+                        .setTitle("Delete Recurring Expense")
+                        .setMessage("Are you sure you want to delete this expense?")
+                        .setPositiveButton("Delete",((dialog, which) -> {
+                            RecurringExpense recurringExpense=recurringExpenseList.get(position);
+                            myRepository.delRecurringExpense(recurringExpense);
+                            recurringExpenseList.remove(recurringExpense);
+                            recyclerView.getAdapter().notifyItemRemoved(viewHolder.getAdapterPosition());
+                        }))
+                        .setNegativeButton("Cancel",((dialog, which) -> {
+                            recyclerView.getAdapter().notifyItemChanged(position);
+                        }))
+                        .setCancelable(false)
+                        .show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
+        return view;
     }
 }

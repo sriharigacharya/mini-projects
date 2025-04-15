@@ -5,13 +5,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Expense.class, Category.class, User.class, Budget.class, RecurringExpense.class, ExportLog.class}, version = 1)
+@Database(entities = {Expense.class, Category.class, User.class, RecurringExpense.class, ExportLog.class}, version = 1)
 public abstract class ETDatabase extends RoomDatabase {
 
     public abstract ExpenseDAO getExpenseDAO();
     public abstract CategoryDAO getCategoryDAO();
     public abstract UserDAO getUserDAO();
-    public abstract BudgetDAO getBudgetDAO();
     public abstract RecurringExpenseDAO getRecurringExpenseDAO();
     public abstract ExportLogDAO getExportLogDAO();
 

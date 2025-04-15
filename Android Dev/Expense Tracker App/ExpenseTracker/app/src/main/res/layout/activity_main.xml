@@ -19,7 +19,19 @@
     android:layout_height="match_parent"
     app:menu="@menu/navbaritems"
     android:layout_gravity="start"
+
     app:headerLayout="@layout/navbarheader">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expense Tracker 2025"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:drawableStart="@drawable/baseline_copyright_24"
+        android:drawablePadding="12dp">
+
+    </TextView>
+
 
 </com.google.android.material.navigation.NavigationView>
 

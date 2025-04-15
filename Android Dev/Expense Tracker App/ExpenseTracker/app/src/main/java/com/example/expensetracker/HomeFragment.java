@@ -2,6 +2,7 @@ package com.example.expensetracker;
 
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,13 +12,21 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +37,10 @@ public class HomeFragment extends Fragment {
     private MyRepository myRepository;
     private FloatingActionButton floatingActionButton;
     private RecyclerView recyclerView;
+    private EditText searchbar;
+    private DatePickerDialog sortfromdate,sorttodate;
+    private Button datepickerfrom,datepickerto;
+    private ImageButton sortset;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,10 +79,6 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
-
     }
 
     @Override
@@ -80,13 +89,64 @@ public class HomeFragment extends Fragment {
         myRepository=new MyRepository(requireActivity().getApplication());
         recyclerView=view.findViewById(R.id.homelist);
         ArrayList<Expense> expenseArrayList=myRepository.getAllExpenses();
+        searchbar=view.findViewById(R.id.homefragmentsearch);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new HomeListAdapter(getContext(),expenseArrayList));
+        HomeListAdapter homeListAdapter=new HomeListAdapter(getContext(),expenseArrayList);
+        recyclerView.setAdapter(homeListAdapter);
         floatingActionButton=view.findViewById(R.id.addexpensebutton);
 
         floatingActionButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(),NewExpenseActivity.class);
             startActivity(intent);
+        });
+
+//        datepickerfrom=view.findViewById(R.id.sortfromdate);
+//        datepickerfrom.setText("From: ");
+//        datepickerto=view.findViewById(R.id.sorttodate);
+//        datepickerto.setText("To: ");
+//        sortset=view.findViewById(R.id.sortset);
+
+//        sortfromdate=DateUtil.initdatepicker(getContext(),datepickerfrom);
+//        sorttodate=DateUtil.initdatepicker(getContext(),datepickerto);
+//        sortset.setOnClickListener(v -> {
+//            if (datepickerfrom.getText().toString().equals("From: ") || datepickerto.getText().toString().equals("To: ")){
+//                Toast.makeText(getContext(),"Enter Range",Toast.LENGTH_LONG).show();
+//                datepickerfrom.setText("From: ");
+//                datepickerto.setText("To: ");
+//            }
+//            else{
+//
+//            }
+//        });
+
+//        datepickerfrom.setOnClickListener(v -> {
+//            DateUtil.opendatepicker(sortfromdate);
+//        });
+//        datepickerto.setOnClickListener(v -> {
+//            DateUtil.opendatepicker(sorttodate);
+//        });
+
+
+
+
+        searchbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query=s.toString();
+                List <Expense> filteredlist=myRepository.searchexpenses(query);
+                homeListAdapter.updateList(filteredlist);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {

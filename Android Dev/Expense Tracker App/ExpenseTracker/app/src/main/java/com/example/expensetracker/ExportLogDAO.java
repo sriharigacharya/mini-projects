@@ -16,7 +16,7 @@ public interface ExportLogDAO {
     @Delete
     void delete(ExportLog exportLog);
 
-    @Query("SELECT * FROM export_log_table")
+    @Query("SELECT * FROM export_log_table ORDER BY export_date DESC")
     List<ExportLog> getAllExportLogs();
 }
 

@@ -35,14 +35,21 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListViewHolder> {
         holder.amt.setText("\u20B9"+expenseList.get(position).getAmount());
         holder.cat.setText(myRepository.getcatnamefromid(expenseList.get(position).getCategoryId()));
         holder.dsc.setText(expenseList.get(position).getDescription());
-        holder.date.setText(expenseList.get(position).getDate());
+        holder.date.setText(expenseList.get(position).getDateinDisplayFormat());
 
         holder.editexpensebutton.setOnClickListener(v -> {
-            Intent intent=new Intent(context,NewExpenseActivity.class);
-            intent.putExtra("Position",position);
+            Intent intent=new Intent(v.getContext(),NewExpenseActivity.class);
+            intent.putExtra("ExpenseID",expenseList.get(position).getId());
             context.startActivity(intent);
         });
     }
+
+    public void updateList(List<Expense> newList) {
+        expenseList.clear();
+        expenseList.addAll(newList);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {

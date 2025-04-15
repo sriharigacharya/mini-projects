@@ -16,7 +16,6 @@ public class MyRepository {
     private final ExpenseDAO expenseDAO;
     private final CategoryDAO categoryDAO;
     private final UserDAO userDAO;
-    private final BudgetDAO budgetDAO;
     private final RecurringExpenseDAO recurringExpenseDAO;
     private final ExportLogDAO exportLogDAO;
 
@@ -28,7 +27,7 @@ public class MyRepository {
         this.expenseDAO = db.getExpenseDAO();
         this.categoryDAO = db.getCategoryDAO();
         this.userDAO = db.getUserDAO();
-        this.budgetDAO = db.getBudgetDAO();
+
         this.recurringExpenseDAO = db.getRecurringExpenseDAO();
         this.exportLogDAO = db.getExportLogDAO();
 
@@ -41,9 +40,61 @@ public class MyRepository {
         executor.execute(() -> expenseDAO.insert(expense));
     }
 
+    public void updateexpense(Expense expense){
+        executor.execute(() -> expenseDAO.update(expense));
+    }
+
     public void delExpense(Expense expense) {
         executor.execute(() -> expenseDAO.delete(expense));
     }
+
+    public Expense getexpensefromid(int id) {
+        List<Expense> expenseList = executeQuery(() -> expenseDAO.getexpense(id));
+        if (expenseList != null && !expenseList.isEmpty()) {
+            return expenseList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public List<Expense> searchexpenses(String searchquery) {
+        if (searchquery == null || searchquery.trim().isEmpty()) {
+            return getAllExpenses();
+        }
+        return executeQuery(() -> new ArrayList<>(expenseDAO.searchExpenses(searchquery)));
+    }
+
+    public List<Expense> getexpensebydate(String fromdate,String todate){
+        return executeQuery(()-> new ArrayList<>(expenseDAO.getexpenseindaterange(fromdate,todate)));
+    }
+    public ArrayList<POJOCatFilterList> getexpensesgroupedbycatogory(String startdate,String enddate){
+        return executeQuery(()-> new ArrayList<>(expenseDAO.getTotalByCategoryNameInRange(startdate,enddate)));
+    }
+
+    public List<POJOMonthlyExpense> getTotalByMonthAndCategory(int categoryId) {
+        return executeQuery(() -> new ArrayList<>(expenseDAO.getTotalByMonthAndCategory(categoryId)));
+    }
+
+    public List<POJOPerDayList> getperdayexpensebymonthandcat(String month,int categoryid){
+        return executeQuery(()-> new ArrayList<>(expenseDAO.getPerDayExpenseByMonthAndCategory(month,categoryid)));
+    }
+
+    public List<Expense> getexpensebydateandcategory(String date,int categoryid){
+        return executeQuery(()-> new ArrayList<>(expenseDAO.getexpensebydateandcategory(date,categoryid)));
+    }
+
+//    public List<Expense> searchExpenseswithdate(String searchQuery, String fromDate, String toDate) {
+//        if ((searchQuery == null || searchQuery.trim().isEmpty()) &&
+//                (fromDate == null || fromDate.trim().isEmpty()) &&
+//                (toDate == null || toDate.trim().isEmpty())) {
+//            return getAllExpenses();
+//        }
+//
+//        return executeQuery(() -> new ArrayList<>(
+//                expenseDAO.searchExpensesWithDate(searchQuery,
+//                        fromDate.isEmpty() ? null : fromDate,
+//                        toDate.isEmpty() ? null : toDate)));
+//    }
 
     public ArrayList<Expense> getAllExpenses() {
         return executeQuery(() -> new ArrayList<>(expenseDAO.getAllExpenses()));
@@ -70,6 +121,8 @@ public class MyRepository {
         executeQuery(() ->idd[0]=(categoryDAO.getidfromname(catname)));
         return idd[0];
     }
+
+
 
     public String getcatnamefromid(int idd){
         final String[] name=new String[1];
@@ -98,22 +151,15 @@ public class MyRepository {
         return executeQuery(() -> new ArrayList<>(userDAO.getAllUsers()));
     }
 
-    // Budget Methods
-    public void addBudget(Budget budget) {
-        executor.execute(() -> budgetDAO.insert(budget));
-    }
 
-    public void delBudget(Budget budget) {
-        executor.execute(() -> budgetDAO.delete(budget));
-    }
-
-    public ArrayList<Budget> getAllBudgets() {
-        return executeQuery(() -> new ArrayList<>(budgetDAO.getAllBudgets()));
-    }
 
     // Recurring Expense Methods
     public void addRecurringExpense(RecurringExpense recurringExpense) {
         executor.execute(() -> recurringExpenseDAO.insert(recurringExpense));
+    }
+
+    public void updaterecdepexpense(RecurringExpense recurringExpense){
+        executor.execute(() -> recurringExpenseDAO.update(recurringExpense));
     }
 
     public void delRecurringExpense(RecurringExpense recurringExpense) {
@@ -123,6 +169,7 @@ public class MyRepository {
     public ArrayList<RecurringExpense> getAllRecurringExpenses() {
         return executeQuery(() -> new ArrayList<>(recurringExpenseDAO.getAllRecurringExpenses()));
     }
+
 
     // Export Log Methods
     public void addExportLog(ExportLog exportLog) {

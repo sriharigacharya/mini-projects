@@ -13,16 +13,26 @@ public class ExportLog {
     @ColumnInfo(name = "file_name")
     private String fileName;
 
+
+
+    @ColumnInfo(name = "date_range")
+    private String daterange;
+
     @ColumnInfo(name = "export_date")
     private String exportDate;
 
-    public ExportLog(String fileName, String exportDate) {
+    public ExportLog(String fileName, String daterange,String exportDate) {
         this.fileName = fileName;
+        this.daterange=daterange;
         this.exportDate = exportDate;
     }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
+
+    public String getDaterange() { return daterange; }
+
+    public void setDaterange(String daterange) { this.daterange = daterange; }
 
     public String getFileName() { return fileName; }
     public void setFileName(String fileName) { this.fileName = fileName; }

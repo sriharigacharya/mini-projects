@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homebutton" android:title="Home" android:icon="@drawable/homeicon"></item>
     <item android:id="@+id/recdepbutton" android:title="Recurring Deposits" android:icon="@drawable/recdepicon"></item>
-<item android:id="@+id/homebutton" android:title="Home" android:icon="@drawable/homeicon"></item>
-    <item android:id="@+id/sortbutton" android:title="Sort" android:icon="@drawable/filtericon"></item>
-
-
+    <item android:id="@+id/catsortbutton" android:title="Category" android:icon="@drawable/managecategoriesimg"></item>
+    <item android:id="@+id/monthlyfilterbutton" android:title="Monthly" android:icon="@drawable/baseline_calendar_month_24"></item>
 </menu>

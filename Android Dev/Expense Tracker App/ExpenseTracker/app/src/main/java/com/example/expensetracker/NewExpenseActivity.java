@@ -2,6 +2,7 @@ package com.example.expensetracker;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +31,7 @@ public class NewExpenseActivity extends AppCompatActivity {
     ArrayList<Category> categoryArrayList;
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> stringArrayAdapter;
-
+    Expense existing_expense;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +42,23 @@ public class NewExpenseActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        amount=findViewById(R.id.amount);
+        desc=findViewById(R.id.description);
+        savebutton=findViewById(R.id.savenewexpense);
+        Intent intentreceive=getIntent();
         MyRepository myRepository=new MyRepository(getApplication());
         categoryArrayList=myRepository.getAllCategories();
+
+
+        datepickerbutton=findViewById(R.id.datepicker);
+        datePickerDialog=DateUtil.initdatepicker(this,datepickerbutton);
+
+        datepickerbutton.setText(DateUtil.gettodaysdate());
+        datepickerbutton.setOnClickListener(v -> {
+            DateUtil.opendatepicker(datePickerDialog);
+        });
+
+
         if(categoryArrayList.size()==0){
             myRepository.addCategory(new Category("Food and Drinks"));
             myRepository.addCategory(new Category("Travel"));
@@ -74,19 +90,37 @@ public class NewExpenseActivity extends AppCompatActivity {
             }
         });
 
-        amount=findViewById(R.id.amount);
-        desc=findViewById(R.id.description);
-        savebutton=findViewById(R.id.savenewexpense);
+
+
+        if(intentreceive.hasExtra("ExpenseID")){
+            int id=intentreceive.getIntExtra("ExpenseID",-1);
+            if(id!=-1){
+                existing_expense=myRepository.getexpensefromid(id);
+                amount.setText(""+existing_expense.getAmount());
+                desc.setText(existing_expense.getDescription());
+                autoCompleteTextView.setText(myRepository.getcatnamefromid(existing_expense.getCategoryId()));
+                datepickerbutton.setText(existing_expense.getDateinDisplayFormat());
+
+            }
+        }
         savebutton.setOnClickListener(v -> {
             if(amount.getText().toString().isEmpty()){
                 Toast.makeText(this, "Amount cannot be empty",Toast.LENGTH_LONG).show();
             }
             else {
-                myRepository.addExpense(new Expense(Double.parseDouble(amount.getText().toString()),
-                        categoryArrayList.get(pos[0]).getId(),
-                        desc.getText().toString(),
-                        datepickerbutton.getText().toString()));
-
+                if(existing_expense!=null){
+                    existing_expense.setAmount(Double.parseDouble(amount.getText().toString()));
+                    existing_expense.setDate(getDateInDbFormat(datepickerbutton.getText().toString()));
+                    existing_expense.setCategoryId(categoryArrayList.get(pos[0]).getId());
+                    existing_expense.setDescription(desc.getText().toString());
+                    myRepository.updateexpense(existing_expense);
+                }
+                else {
+                    myRepository.addExpense(new Expense(Double.parseDouble(amount.getText().toString()),
+                            categoryArrayList.get(pos[0]).getId(),
+                            desc.getText().toString(),
+                            getDateInDbFormat(datepickerbutton.getText().toString())));
+                }
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 Toast.makeText(this,
@@ -100,73 +134,75 @@ public class NewExpenseActivity extends AppCompatActivity {
 
 
 
-
-
-
-        initdatepicker();
-
-        datepickerbutton=findViewById(R.id.datepicker);
-        datepickerbutton.setText(gettodaysdate());
-        datepickerbutton.setOnClickListener(v -> {
-            opendatepicker(datepickerbutton);
-        });
-
-
     }
 
-    private String gettodaysdate() {
-        Calendar calendar=Calendar.getInstance();
-        int month=calendar.get(Calendar.MONTH);
-        int year=calendar.get(Calendar.YEAR);
-        int day=calendar.get(Calendar.DAY_OF_MONTH);
-        return makedatestring(day,month+1,year);
+//    private String gettodaysdate() {
+//        Calendar calendar=Calendar.getInstance();
+//        int month=calendar.get(Calendar.MONTH);
+//        int year=calendar.get(Calendar.YEAR);
+//        int day=calendar.get(Calendar.DAY_OF_MONTH);
+//        return DateUtil.makedatestring(day,month+1,year);
+//
+//    }
 
-    }
+//    void initdatepicker(Context context,Button dp){
+//        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                month=month+1;
+//                String date=makedatestring(dayOfMonth, month,year);
+//                dp.setText(date);
+//            }
+//
+//
+//        };
+//
+//        Calendar calendar=Calendar.getInstance();
+//        int month=calendar.get(Calendar.MONTH);
+//        int year=calendar.get(Calendar.YEAR);
+//        int day=calendar.get(Calendar.DAY_OF_MONTH);
+//
+//        datePickerDialog=new DatePickerDialog(context, AlertDialog.THEME_HOLO_DARK,dateSetListener,year,month,day);
+//
+//    }
 
-    private void initdatepicker(){
-        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month=month+1;
-                String date=makedatestring(dayOfMonth, month,year);
-                datepickerbutton.setText(date);
-            }
+//    private String makedatestring(int dayOfMonth, int month, int year) {
+////        maindate = String.format("%04d-%02d-%02d", year, month, dayOfMonth);
+//        return dayOfMonth + " " + getmonthname(month) + " " + year;
+//    }
 
+//    private String getmonthname(int month) {
+//        switch(month){
+//            case 1:return "Jan";
+//            case 2:return "Feb";
+//            case 3:return "Mar";
+//            case 4:return "Apr";
+//            case 5:return "May";
+//            case 6:return "Jun";
+//            case 7:return "Jul";
+//            case 8:return "Aug";
+//            case 9:return "Sep";
+//            case 10:return "Oct";
+//            case 11:return "Nov";
+//            case 12:return "Dec";
+//        }
+//        return "Error";
+//    }
 
-        };
-
-        Calendar calendar=Calendar.getInstance();
-        int month=calendar.get(Calendar.MONTH);
-        int year=calendar.get(Calendar.YEAR);
-        int day=calendar.get(Calendar.DAY_OF_MONTH);
-
-        datePickerDialog=new DatePickerDialog(this, AlertDialog.THEME_HOLO_DARK,dateSetListener,year,month,day);
-
-    }
-
-    private String makedatestring(int dayOfMonth, int month, int year) {
-        return dayOfMonth+" "+getmonthname(month)+" "+year;
-    }
-
-    private String getmonthname(int month) {
-        switch(month){
-            case 1:return "Jan";
-            case 2:return "Feb";
-            case 3:return "Mar";
-            case 4:return "Apr";
-            case 5:return "May";
-            case 6:return "Jun";
-            case 7:return "Jul";
-            case 8:return "Aug";
-            case 9:return "Sep";
-            case 10:return "Oct";
-            case 11:return "Nov";
-            case 12:return "Dec";
+    private String getDateInDbFormat(String displayDate) {
+        try {
+            java.text.SimpleDateFormat displayFormat = new java.text.SimpleDateFormat("d MMM yyyy", java.util.Locale.ENGLISH);
+            java.text.SimpleDateFormat dbFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.ENGLISH);
+            java.util.Date date = displayFormat.parse(displayDate);
+            return dbFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // or handle fallback
         }
-        return "Error";
     }
 
-    private void opendatepicker(View view){
-        datePickerDialog.show();
-    }
+
+//    private void opendatepicker(View view){
+//        datePickerDialog.show();
+//    }
 }

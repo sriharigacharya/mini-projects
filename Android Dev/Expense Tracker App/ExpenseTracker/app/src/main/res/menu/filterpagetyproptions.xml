@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/filterbycat" android:title="By Category"></item>
+    <item android:id="@+id/filterbyday" android:title="By Day"></item>
+    <item android:id="@+id/filterbymonth" android:title="By Month"></item>
+
+</menu>

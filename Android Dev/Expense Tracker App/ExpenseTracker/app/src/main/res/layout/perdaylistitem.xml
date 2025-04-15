@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    app:cardCornerRadius="10dp"
+    android:elevation="10dp"
+    android:layout_margin="12dp"
+    app:cardBackgroundColor="@color/light_gray">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/perdaydate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apr 12"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal">
+
+    </TextView>
+        <TextView
+        android:id="@+id/perdayamt"
+        android:layout_marginTop="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/rupeesymbol"
+        android:text="5000"
+        android:textColor="@color/black"
+        android:layout_gravity="start"
+        android:textSize="18dp">
+    </TextView>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

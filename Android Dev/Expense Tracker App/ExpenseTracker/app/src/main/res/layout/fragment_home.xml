@@ -10,10 +10,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/homefragmentsearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search"
+        android:padding="8dp"
+        android:layout_margin="10dp"
+        android:drawableEnd="@drawable/baseline_content_paste_search_24"
+        android:drawablePadding="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </EditText>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homelist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/homefragmentsearch"
+        app:layout_constraintBottom_toBottomOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,3 +46,41 @@
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
+
+
+<!--<LinearLayout-->
+<!--android:id="@+id/sortdatepickers"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:orientation="horizontal"-->
+<!--android:layout_margin="8dp"-->
+<!--app:layout_constraintTop_toBottomOf="@id/homefragmentsearch">-->
+
+
+<!--<Button-->
+<!--    android:id="@+id/sortfromdate"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    style="?android:spinnerStyle"-->
+<!--    android:layout_marginEnd="28dp">-->
+<!--</Button>-->
+
+<!--<Button-->
+<!--    android:id="@+id/sorttodate"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    style="?android:spinnerStyle">-->
+<!--</Button>-->
+<!--<View-->
+<!--    android:layout_width="0dp"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:layout_weight="1">-->
+<!--</View>-->
+<!--<ImageButton-->
+<!--    android:id="@+id/sortset"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:src="@drawable/goarrow">-->
+<!--</ImageButton>-->
+
+<!--</LinearLayout>-->

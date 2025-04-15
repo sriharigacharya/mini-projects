@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    app:cardCornerRadius="10dp"
+    android:elevation="10dp"
+    android:layout_margin="12dp"
+    app:cardBackgroundColor="@color/light_gray">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_margin="16dp">
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/catfilterlistname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catogory Name"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp">
+
+        </TextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </View>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Last 30 days:"
+            android:textColor="@color/dark_gray">
+        </TextView>
+            <TextView
+                android:id="@+id/catfilterlistamt"
+                android:layout_marginVertical="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/rupeesymbol"
+                android:text="5000"
+                android:layout_gravity="start"
+                android:textSize="16dp"
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
